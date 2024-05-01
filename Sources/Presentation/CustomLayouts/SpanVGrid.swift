@@ -26,7 +26,7 @@ public struct SpanVGrid: Layout {
 
         totalHeight += CGFloat(rows.count - 1) * spacing.height
         return CGSize(
-            width: proposal.replacingUnspecifiedDimensions().width,
+            width: proposal.width ?? 0,
             height: totalHeight
         )
     }
