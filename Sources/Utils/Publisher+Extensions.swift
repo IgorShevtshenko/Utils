@@ -7,6 +7,14 @@ public extension Publisher where Output == Never {
     ) -> Publishers.Map<Self, NewOutput> {
         map { _ -> NewOutput in }
     }
+    
+    func then<T, P: Publisher>(
+        _ publisher: P
+    ) -> AnyPublisher<T, Failure> where P.Output == T, P.Failure == Failure {
+        andThen(justReturn: ())
+            .flatMap { _ in publisher }
+            .eraseToAnyPublisher()
+    }
 
     func andThen<T, P: Publisher>(
         _ publisher: P
