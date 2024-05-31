@@ -7,4 +7,12 @@ public extension Array {
         if predicate { return self + collection }
         return self
     }
+    
+    func remove(
+        _ collection: Self,
+        if predicate: Bool
+    ) -> Self where Element: Hashable {
+        if predicate { return Array(Set(self).subtracting(collection)) }
+        return self
+    }
 }
