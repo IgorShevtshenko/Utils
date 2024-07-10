@@ -1,8 +1,12 @@
 import Foundation
 
 public extension Double {
-
-    func pretty(subText: String, ommitPrefix: Bool = false) -> String {
+    
+    func pretty(
+        subText: String,
+        ommitPrefix: Bool = false,
+        minimumFractionDigits: Int = 2
+    ) -> String {
         let numberFormatter = NumberFormatter()
         numberFormatter.groupingSeparator = " "
         numberFormatter.groupingSize = 3
@@ -10,7 +14,9 @@ public extension Double {
         numberFormatter.decimalSeparator = ","
         numberFormatter.alwaysShowsDecimalSeparator = false
         let isFractionDigitsAvailable = truncatingRemainder(dividingBy: 1) != 0
-        numberFormatter.minimumFractionDigits = !isFractionDigitsAvailable ? 0 : 2
+        numberFormatter.minimumFractionDigits = !isFractionDigitsAvailable
+        ? 0
+        : minimumFractionDigits
         numberFormatter.maximumFractionDigits = 2
         let absoluteNumber = NSNumber(value: fabs(self))
         guard let formattedString = numberFormatter.string(from: absoluteNumber) else {
@@ -19,16 +25,16 @@ public extension Double {
         let finalString = prefix(ommitPrefix: ommitPrefix) + formattedString + subText
         return finalString.condensedWhitespaces
     }
-
+    
     private func prefix(ommitPrefix: Bool) -> String {
         sign == .minus
-        ? "-" 
+        ? "-"
         : ommitPrefix ? "" : "+"
     }
 }
 
 private extension String {
-
+    
     var condensedWhitespaces: String {
         split(separator: " ").joined(separator: " ")
     }
