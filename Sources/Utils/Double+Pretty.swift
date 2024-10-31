@@ -5,13 +5,14 @@ public extension Double {
     func pretty(
         subText: String,
         ommitPrefix: Bool = false,
-        minimumFractionDigits: Int = 2
+        minimumFractionDigits: Int = 2,
+        decimalSeparator: String = ","
     ) -> String {
         let numberFormatter = NumberFormatter()
         numberFormatter.groupingSeparator = " "
         numberFormatter.groupingSize = 3
         numberFormatter.usesGroupingSeparator = true
-        numberFormatter.decimalSeparator = ","
+        numberFormatter.decimalSeparator = decimalSeparator
         numberFormatter.alwaysShowsDecimalSeparator = false
         let isFractionDigitsAvailable = truncatingRemainder(dividingBy: 1) != 0
         numberFormatter.minimumFractionDigits = !isFractionDigitsAvailable
