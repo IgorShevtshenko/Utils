@@ -1,7 +1,8 @@
 import Combine
 
-public extension Future where Failure == Error {
+public extension Future where Failure == Error, Output: Sendable {
     
+    @MainActor
     convenience init(asyncFunc: @escaping () async throws -> Output) {
         self.init { promise in
             Task {

@@ -1,13 +1,13 @@
 import SwiftUI
 
-public extension Binding {
+public extension Binding where Value: Sendable {
 
-    init(from value: Value, onSet: @escaping (Value) -> Void) {
+    init(from value: Value, onSet: @escaping @Sendable (Value) -> Void) {
         self = Binding(get: { value }, set: onSet)
     }
 }
 
-public extension Binding where Value: Equatable {
+public extension Binding where Value: Equatable, Value: Sendable {
 
     func removeDuplicates() -> Self {
         Binding(

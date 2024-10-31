@@ -28,6 +28,7 @@ public struct SafariWebView: UIViewControllerRepresentable {
         context.coordinator.parent = self
     }
 
+    @MainActor
     public class Coordinator: NSObject, SFSafariViewControllerDelegate {
 
         fileprivate var parent: SafariWebView
@@ -37,8 +38,12 @@ public struct SafariWebView: UIViewControllerRepresentable {
             super.init()
         }
 
-        public func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
-            parent.dismiss()
+        nonisolated public func safariViewControllerDidFinish(
+            _ controller: SFSafariViewController
+        ) {
+            Task {
+                await parent.dismiss()
+            }
         }
     }
 }

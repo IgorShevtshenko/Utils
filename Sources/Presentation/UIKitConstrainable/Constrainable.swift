@@ -8,6 +8,7 @@ extension UILayoutGuide: Constrainable {}
 
 public extension Constrainable {
 
+    @MainActor
     func constrain(
         edges: [NSLayoutConstraint.Edge],
         to constrainable: Constrainable,
@@ -25,6 +26,7 @@ public extension Constrainable {
         }
     }
 
+    @MainActor
     @discardableResult
     func constrain(
         edge: NSLayoutConstraint.Edge,
@@ -44,6 +46,7 @@ public extension Constrainable {
         )
     }
 
+    @MainActor
     @discardableResult
     func constrain(
         dimension: NSLayoutConstraint.Dimension,
@@ -61,6 +64,7 @@ public extension Constrainable {
         )
     }
 
+    @MainActor
     @discardableResult
     func constrain(
         dimension: NSLayoutConstraint.Dimension,
@@ -82,6 +86,7 @@ public extension Constrainable {
         )
     }
 
+    @MainActor
     func constrain(
         size: CGSize,
         relation: NSLayoutConstraint.Relation = .equal,
@@ -91,6 +96,7 @@ public extension Constrainable {
         constrain(dimension: .height, constant: size.height, relation: relation, priority: priority)
     }
 
+    @MainActor
     @discardableResult
     func constrain(
         center axis: NSLayoutConstraint.Axis,
@@ -107,6 +113,7 @@ public extension Constrainable {
         )
     }
 
+    @MainActor
     func constrain(
         centerTo constrainable: Constrainable,
         constant: CGFloat = 0,
@@ -116,6 +123,7 @@ public extension Constrainable {
         constrain(center: .vertical, to: constrainable, constant: constant, priority: priority)
     }
 
+    @MainActor
     @discardableResult
     private func constrain<T: LayoutConstraintAttributeConvertible>(
         attribute: T,
