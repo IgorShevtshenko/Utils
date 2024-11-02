@@ -2,7 +2,7 @@ import SwiftUI
 
 public extension Binding where Value: Sendable {
 
-    init(from value: Value, onSet: @escaping @Sendable (Value) -> Void) {
+    init(from value: Value, onSet: @MainActor @escaping (Value) -> Void) {
         self = Binding(get: { value }, set: onSet)
     }
 }
